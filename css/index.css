@@ -1,0 +1,145 @@
+body {
+  padding: 0px;
+  margin: 0px;
+  font-family: 'Manrope-Light';
+  letter-spacing: 1px;
+}
+
+@font-face {
+  font-family: "Manrope-Bold";
+  src: url("../fonts/Manrope-Bold.ttf");
+}
+
+@font-face {
+  font-family: "Manrope-Light";
+  src: url("../fonts/Manrope-Light.ttf");
+}
+
+input:focus {
+  outline: none;
+}
+
+input, textarea {
+  display: block;
+  border: 1px solid #00d2d2;
+  border-radius: 4px;
+  width: 85%;
+  max-width: 650px;
+  margin-bottom: 25px;
+  position: relative;
+  left: 50%;
+  -webkit-transform: translateX(-50%);
+          transform: translateX(-50%);
+  padding-left: 20px;
+  padding-right: 20px;
+  font-size: 14px;
+  color: #141414;
+}
+
+@media screen and (max-width: 900px) {
+  input, textarea {
+    font-size: 12px;
+  }
+}
+
+#organisationForm {
+  height: auto;
+  margin-top: 100px;
+}
+
+#organisationForm h1 {
+  text-align: center;
+  font-family: 'Manrope-Bold';
+  font-size: 24px;
+  width: 85%;
+  max-width: 650px;
+  margin: auto auto;
+  margin-bottom: 50px;
+  display: block;
+  color: #141414;
+}
+
+@media screen and (max-width: 900px) {
+  #organisationForm h1 {
+    font-size: 20px;
+  }
+}
+
+#organisationForm input {
+  height: 44px;
+  font-family: 'Manrope-Light';
+}
+
+#organisationForm textarea {
+  height: 180px;
+  resize: none;
+  padding-top: 20px;
+  font-family: 'Manrope-Light';
+}
+
+#organisationForm button {
+  border: none;
+  height: 44px;
+  width: 160px;
+  display: block;
+  margin: auto auto;
+  font-size: 18px;
+  margin-top: 25px;
+  border-radius: 4px;
+  -webkit-box-shadow: 0 0 4px #d3d3d3;
+          box-shadow: 0 0 4px #d3d3d3;
+  background-color: #00d2d2;
+  color: #ffffff;
+  cursor: pointer;
+}
+
+@media screen and (max-width: 900px) {
+  #organisationForm button {
+    font-size: 16px;
+  }
+}
+
+.popup {
+  position: fixed;
+  top: 100vh;
+  left: 50%;
+  height: 54px;
+  width: 90%;
+  max-width: 650px;
+  -webkit-transform: translateY(0%) translateX(-50%);
+          transform: translateY(0%) translateX(-50%);
+  opacity: 0;
+  border-radius: 4px;
+  -webkit-box-shadow: 0 0 4px #d3d3d3;
+          box-shadow: 0 0 4px #d3d3d3;
+  -webkit-transition: all .4s ease;
+  transition: all .4s ease;
+  color: #ffffff;
+  text-align: center;
+  line-height: 54px;
+  font-size: 12px;
+  font-family: 'Manrope-Bold';
+}
+
+.error {
+  -webkit-transform: translateY(-200%) translateX(-50%);
+          transform: translateY(-200%) translateX(-50%);
+  opacity: 1;
+  background: #FF5151;
+}
+
+.success {
+  -webkit-transform: translateY(-200%) translateX(-50%);
+          transform: translateY(-200%) translateX(-50%);
+  opacity: 1;
+  background: #00D290;
+}
+
+#web-link {
+  margin-bottom: 50px;
+}
+
+.text-field-false {
+  border: 1px solid #FF5151;
+}
+/*# sourceMappingURL=index.css.map */
