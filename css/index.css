@@ -19,7 +19,7 @@ input:focus {
   outline: none;
 }
 
-input, textarea {
+input, textarea, select {
   display: block;
   border: 1px solid #00d2d2;
   border-radius: 4px;
@@ -37,7 +37,7 @@ input, textarea {
 }
 
 @media screen and (max-width: 900px) {
-  input, textarea {
+  input, textarea, select {
     font-size: 12px;
   }
 }
@@ -67,6 +67,11 @@ input, textarea {
 }
 
 #organisationForm input {
+  height: 44px;
+  font-family: 'Manrope-Light';
+}
+
+#organisationForm select {
   height: 44px;
   font-family: 'Manrope-Light';
 }
@@ -142,5 +147,17 @@ input, textarea {
 
 .text-field-false {
   border: 1px solid #FF5151;
+}
+
+#country {
+  display: none;
+}
+
+#state {
+  display: none;
+}
+
+#city {
+  display: none;
 }
 /*# sourceMappingURL=index.css.map */

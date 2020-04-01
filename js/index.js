@@ -13,15 +13,16 @@ let details = {
 
 let emailValidity = false;
 let phoneNumberValidity = false;
+let countryValidity = false;
 
 document.getElementById('organisationForm').addEventListener('submit',(e)=>{
 
     e.preventDefault();
 
     details.name  = document.getElementById('name').value;
-    details.city  = document.getElementById('city').value;
-    details.state  = document.getElementById('state').value;
-    details.country  = document.getElementById('country').value;
+    details.city  = document.getElementById('city').options[document.getElementById('city').selectedIndex].value;
+    details.state  = document.getElementById('state').options[document.getElementById('state').selectedIndex].value;
+    details.country  = document.getElementById('country').options[document.getElementById('country').selectedIndex].value;
     details.description  = document.getElementById('description').value;
     details.email  = document.getElementById('email').value;
     details.phone_no  = document.getElementById('phone-number').value;
@@ -33,9 +34,152 @@ document.getElementById('organisationForm').addEventListener('submit',(e)=>{
 
 });
 
+let api_token = null;
+
+fetch('https://www.universal-tutorial.com/api/getaccesstoken', {
+            method:'GET',
+            crossDomain:true,
+            headers:{
+                'Accept':'application/json',
+                'Content-Type':'application/json',
+                "api-token": "kg5Yr2zZ59lUHZb_11ft6sZ5tkbd5vNmqQV2hrfEbtuYrA2z_vADp4W6qXp1k1S3Ie0",
+                "user-email": "samarthnayyar123@gmail.com"
+            },
+        })
+        .then((response) => response.json())
+        .then((result)=>{
+            api_token = 'Bearer ' + result.auth_token;
+            fetchCountries();
+        })
+
+function fetchCountries(){
+    fetch('https://www.universal-tutorial.com/api/countries/', {
+            method:'GET',
+            crossDomain:true,
+            headers:{
+                "Authorization": String(api_token),
+                "Accept": "application/json"
+            },
+        })
+        .then((response) => response.json())
+        .then((result)=>{
+            displayCountries(result);
+        })
+}
+
+function fetchStates(country){
+    fetch('https://www.universal-tutorial.com/api/states/'+country, {
+            method:'GET',
+            crossDomain:true,
+            headers:{
+                "Authorization": String(api_token),
+                "Accept": "application/json"
+            },
+        })
+        .then((response) => response.json())
+        .then((result)=>{
+            displayStates(result);
+        })
+}
+
+
+function fetchCities(state){
+    fetch('https://www.universal-tutorial.com/api/cities/'+state, {
+            method:'GET',
+            crossDomain:true,
+            headers:{
+                "Authorization": String(api_token),
+                "Accept": "application/json"
+            },
+        })
+        .then((response) => response.json())
+        .then((result)=>{
+            displayCities(result);
+        })
+}
+
+function displayCountries(data){
+    let i;
+    document.getElementById('country').style.display="block";
+    for(i=0; i< data.length;i++){
+        document.getElementById('country').insertAdjacentHTML('beforeend', '<option value='+ data[i].country_name +'>'+data[i].country_name +'</option>');
+    }
+}
+
+function displayStates(data){
+    let i;
+    document.getElementById('state').style.display="block";
+    document.getElementById('state').innerHTML = '<option value="None">None</option>';
+    setTimeout(()=>{
+
+        for(i=0; i< data.length;i++){
+            document.getElementById('state').insertAdjacentHTML('beforeend', '<option value='+ data[i].state_name +'>'+data[i].state_name +'</option>');
+        }
+
+    },200)
+}
+
+function displayCities(data){
+    let i;
+    document.getElementById('city').style.display="block";
+    document.getElementById('city').innerHTML = '<option value="None">None</option>';
+    setTimeout(()=>{
+
+        for(i=0; i< data.length;i++){
+            document.getElementById('city').insertAdjacentHTML('beforeend', '<option value='+ data[i].city_name +'>'+data[i].city_name +'</option>');
+        }
+
+    },200)
+}
+
+
+document.getElementById('country').addEventListener('input',()=>{
+    let countryValue = document.getElementById('country').options[document.getElementById('country').selectedIndex].value;
+    if(countryValue!='None'){
+        fetchStates(countryValue);
+        document.getElementById('country').classList.remove('text-field-false');
+        countryValidity = true;
+    }
+    else{
+        document.getElementById('country').classList.add('text-field-false');
+        document.getElementById('state').style.display = "None";
+        document.getElementById('city').style.display = "None";
+        countryValidity = false;
+    }
+})
+
+document.getElementById('state').addEventListener('input',()=>{
+    let stateValue = document.getElementById('state').options[document.getElementById('state').selectedIndex].value;
+    fetchCities(stateValue);
+})
+
 function pushDetails(){
+
+
     
-    fetch('https://hestia-requests.herokuapp.com/api/requests/add_organization/', {
+    if(countryValidity==false){
+        document.getElementById('popup').classList.add('error');
+        document.getElementById('popup').innerHTML = "Check Country";
+        setTimeout(function () {
+            document.getElementById('popup').classList.remove('error');
+        }, 3000);
+    }
+    else if(emailValidity==false){
+        document.getElementById('popup').classList.add('error');
+        document.getElementById('popup').innerHTML = "Check Email";
+        setTimeout(function () {
+            document.getElementById('popup').classList.remove('error');
+        }, 3000);
+    }
+    else if(phoneNumberValidity==false){
+        document.getElementById('popup').classList.add('error');
+        document.getElementById('popup').innerHTML = "Check Phone Number";
+        setTimeout(function () {
+            document.getElementById('popup').classList.remove('error');
+        }, 3000);
+    }
+    else{
+        fetch('https://hestia-requests.herokuapp.com/api/requests/add_organization/', {
             method:'POST',
             crossDomain:true,
             headers:{
@@ -77,6 +221,7 @@ function pushDetails(){
                 document.getElementById('popup').classList.remove('error');
             },3000);
         })
+    }
 
 }
 

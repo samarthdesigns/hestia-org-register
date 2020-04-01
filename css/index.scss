@@ -19,7 +19,7 @@ input:focus{
     outline: none;
 }
 
-input, textarea{
+input, textarea, select{
     display: block;
     border: 1px solid #00d2d2;
     border-radius: 4px;
@@ -62,6 +62,11 @@ input, textarea{
     }
 
     input{
+        height: 44px;
+        font-family: 'Manrope-Light';
+    }
+
+    select{
         height: 44px;
         font-family: 'Manrope-Light';
     }
@@ -132,5 +137,17 @@ input, textarea{
 
 .text-field-false{
     border: 1px solid #FF5151;
+}
+
+#country{
+    display: none;
+}
+
+#state{
+    display: none;
+}
+
+#city{
+    display: none;
 }
 
