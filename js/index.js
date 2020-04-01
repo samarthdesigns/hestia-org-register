@@ -109,7 +109,7 @@ function displayCountries(data){
 function displayStates(data){
     let i;
     document.getElementById('state').style.display="block";
-    document.getElementById('state').innerHTML = '<option value="None">None</option>';
+    document.getElementById('state').innerHTML = '<option value="None">Select State</option>';
     setTimeout(()=>{
 
         for(i=0; i< data.length;i++){
@@ -122,7 +122,7 @@ function displayStates(data){
 function displayCities(data){
     let i;
     document.getElementById('city').style.display="block";
-    document.getElementById('city').innerHTML = '<option value="None">None</option>';
+    document.getElementById('city').innerHTML = '<option value="None">Select City</option>';
     setTimeout(()=>{
 
         for(i=0; i< data.length;i++){
