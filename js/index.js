@@ -194,7 +194,10 @@ function pushDetails(){
                 country: details.country,
                 description: details.description,
                 email: details.email,
-                phone_no: details.phone_no
+                phone_no: details.phone_no,
+                address: details.address,
+                other_contact: details.other_contact,
+                web_links: details.web_links
             }),
         })
         .then((response) => response.json())
